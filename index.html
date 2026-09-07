@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Time Ledger</title>
+<meta name="description" content="A personal daybook for categorizing your hours, jotting daily notes, and tracking work/study tasks.">
+
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#EFE8D8">
+
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Time Ledger">
+
+<link rel="stylesheet" href="./css/fonts.css">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Time ledger</h1>
+    <div class="date" id="today-date"></div>
+  </header>
+  <p class="subhead">Pick a stamp, then mark the hours below. Hours run midnight to midnight, so a late night's sleep splits across today and tomorrow — that's normal.</p>
+
+  <section>
+    <h2>Today's balance</h2>
+    <div class="totals-bar" id="totals-bar"></div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section>
+    <h2>Today's hours <button class="h2-action" id="clear-day">Clear today</button></h2>
+    <div class="stamp-row" id="stamp-row"></div>
+    <p class="drag-hint">Tap an hour to stamp it. On a mouse, click and drag to paint several at once.</p>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <section>
+    <h2>Today's notes</h2>
+    <textarea class="notes-box" id="notes-box" placeholder="What's on your mind for today — the work you need to get through, what you want to focus on, anything to remember."></textarea>
+    <div class="save-hint" id="notes-save-hint">&nbsp;</div>
+  </section>
+
+  <section>
+    <h2>Work and study tasks</h2>
+    <div class="task-form">
+      <input type="text" id="task-input" placeholder="What needs doing?">
+      <select id="task-cat">
+        <option value="work">Work</option>
+        <option value="study">Study</option>
+        <option value="personal">Personal</option>
+      </select>
+      <button id="task-add" type="button">Add</button>
+    </div>
+    <ul class="task-list" id="task-list"></ul>
+    <div class="err" id="task-err" style="display:none;"></div>
+  </section>
+
+  <section>
+    <h2>Last 7 nights of sleep</h2>
+    <div class="history-strip" id="history-strip">
+      <div class="loading">Loading history…</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>This week's balance</h2>
+    <div class="weekly-strip" id="weekly-strip">
+      <div class="loading">Loading week…</div>
+    </div>
+  </section>
+
+  <footer class="app-footer">Time Ledger · stored on this device only</footer>
+
+</div>
+
+<script type="module" src="./js/app.js"></script>
+</body>
+</html>
