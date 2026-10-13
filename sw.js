@@ -1,14 +1,17 @@
 // Bump this on every deploy that changes any cached file — it's what
 // forces the old cache to be dropped and the new assets to be fetched.
-const CACHE_NAME = 'time-ledger-v2';
+const CACHE_NAME = 'time-ledger-he-slop-v4';
 
 const PRECACHE_URLS = [
   './',
   './index.html',
   './manifest.json',
   './css/style.css',
+  './css/slop.css',
   './css/fonts.css',
   './js/app.js',
+  './js/slop.js',
+  './js/buzzwords.js',
   './js/store.js',
   './js/dates.js',
   './js/categories.js',

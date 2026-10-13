@@ -1,17 +1,39 @@
 {
-  "name": "Time Ledger",
-  "short_name": "Time Ledger",
-  "description": "A personal daybook for categorizing your hours, jotting daily notes, and tracking work/study tasks.",
+  "name": "יומן הזמן AI — מהדורת סגול",
+  "short_name": "יומן הזמן",
+  "description": "יומן שעות ומשימות בעברית עם חישובים מיותרים לשם המתיחה.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#EFE8D8",
-  "theme_color": "#EFE8D8",
+  "background_color": "#140924",
+  "theme_color": "#140924",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
-    { "src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
-  ]
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "lang": "he",
+  "dir": "rtl"
 }

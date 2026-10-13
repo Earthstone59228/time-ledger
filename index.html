@@ -1,84 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Time Ledger</title>
-<meta name="description" content="A personal daybook for categorizing your hours, jotting daily notes, and tracking work/study tasks.">
+<title>יומן הזמן AI ✦ העתיד כבר מאחר</title>
+<meta name="description" content="יומן אישי לסיווג שעות היום, כתיבת הערות ומעקב אחר משימות עבודה ולימודים.">
 
 <link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#EFE8D8">
+<meta name="theme-color" content="#140924">
 
 <link rel="icon" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Time Ledger">
+<meta name="apple-mobile-web-app-title" content="יומן הזמן">
 
 <link rel="stylesheet" href="./css/fonts.css">
 <link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/slop.css">
 </head>
 <body>
 <div class="page">
 
   <header>
-    <h1>Time ledger</h1>
+    <h1>✦ יומן הזמן<span class="brand-ai">.ai</span></h1>
     <div class="date" id="today-date"></div>
   </header>
-  <p class="subhead">Pick a stamp, then mark the hours below. Hours run midnight to midnight, so a late night's sleep splits across today and tomorrow — that's normal.</p>
+  <nav class="slop-nav" aria-label="ניווט"><a href="#workspace">הפלטפורמה</a><a href="#synergy">סינרגיה</a><a href="#pricing">תמחור</a><a class="nav-cta" href="#workspace">מתחילים להתעלות ↗</a></nav>
+  <section class="hero">
+    <span class="eyebrow">✦ חדש: עכשיו עם 512 שכבות של קסם AI</span>
+    <h2>בנו את העתיד.<br><span>בזבזו את הזמן.</span></h2>
+    <p>שחררו את הפוטנציאל האינסופי של שעות היום עם חוויית פרודוקטיביות מהפכנית. עכשיו עם יותר סגול ופחות משמעות.</p>
+    <div class="hero-actions"><a class="gradient-button" href="#workspace">התחילו תקופת ניסיון חינמית ✦</a><button class="ghost-button" id="demo-button">צפו בקסם ◉</button></div>
+    <div class="trust-line">מהדורת מתיחה · אין AI אמיתי · כל המדדים כאן מומצאים</div>
+    <div class="hero-metrics"><div><b dir="ltr">10K+</b><span>חזונות שלא מומשו</span></div><div><b dir="ltr">99.9%</b><span>גרדיאנט מובטח</span></div><div><b dir="ltr">50M+</b><span>יחידות סינרגיה דמיוניות</span></div></div>
+  </section>
+  <div class="logo-strip" aria-label="מותגים מומצאים"><span>סומכים עלינו (בדמיון)</span><b>◈ Quantum</b><b>✳ Nexus</b><b>⬡ Orbit</b><b>✦ Synergy</b></div>
+  <section class="synergy-section" id="synergy">
+    <div class="section-kicker">הכול מועצם. שום דבר לא מוסבר.</div><h2>העצימו את ההעצמה שלכם ✧</h2>
+    <div class="feature-grid">
+      <article class="feature-card"><span class="feature-icon">✦</span><h3>מנוע סינרגיה קוונטית</h3><p>הופך לחיצה אחת לכמה שלבי טעינה מיותרים.</p><button class="ghost-button useless-action" data-tool="synergy">יצירת סינרגיה ↗</button></article>
+      <article class="feature-card"><span class="feature-icon">◈</span><h3>תובנות AI מתקדמות</h3><p>אותו משפט מוטיבציה, אחרי המתנה ארוכה יותר.</p><button class="ghost-button useless-action" data-tool="insight">קבלו תובנה ✧</button></article>
+      <article class="feature-card"><span class="feature-icon">⌁</span><h3>ענן מקומי גלובלי</h3><p>כל הנתונים במכשיר. הענן הוא בעיקר אווירה.</p><button class="ghost-button useless-action" data-tool="cloud">סנכרון האווירה ☁</button></article>
+    </div>
+    <div class="slop-output" id="slop-output" role="status">המערכת מוכנה לייעל את חוסר היעילות שלכם.</div>
+    <div class="sparkline" id="sparkline" aria-hidden="true"></div>
+  </section>
+  <div class="workspace-heading" id="workspace"><span class="eyebrow">✦ סביבת העבודה של העתיד</span><h2>אה, כן. גם יומן שעות.</h2><p>גללתם מעבר לשיווק. הישג יוצא דופן.</p></div>
+  <aside class="parody-notice">מהדורת מתיחה: כל חישוב עובר ועדה של 512 סבבים. כי למה לחשב פעם אחת?
+    <label><input id="parody-mode" type="checkbox" checked> חישובים מיותרים (אפשר לכבות)</label>
+  </aside>
+  <p class="subhead">בחרו חותמת וסמנו את השעות למטה. היום נמשך מחצות עד חצות, כך ששינה מאוחרת מתחלקת בין היום למחר — זה רגיל.</p>
 
   <section>
-    <h2>Today's balance</h2>
+    <h2>מאזן היום</h2>
     <div class="totals-bar" id="totals-bar"></div>
     <div class="legend" id="legend"></div>
   </section>
 
   <section>
-    <h2>Today's hours <button class="h2-action" id="clear-day">Clear today</button></h2>
+    <h2>שעות היום <button class="h2-action" id="clear-day">ניקוי שעות היום</button></h2>
     <div class="stamp-row" id="stamp-row"></div>
-    <p class="drag-hint">Tap an hour to stamp it. On a mouse, click and drag to paint several at once.</p>
+    <p class="drag-hint">הקישו על שעה כדי לסמן אותה. בעכבר אפשר ללחוץ ולגרור כדי לסמן כמה שעות יחד.</p>
     <div class="timeline" id="timeline"></div>
   </section>
 
   <section>
-    <h2>Today's notes</h2>
-    <textarea class="notes-box" id="notes-box" placeholder="What's on your mind for today — the work you need to get through, what you want to focus on, anything to remember."></textarea>
+    <h2>הערות היום</h2>
+    <textarea class="notes-box" id="notes-box" aria-label="הערות היום" dir="auto" placeholder="מה מתוכנן להיום — עבודה שצריך לסיים, דברים שחשוב להתמקד בהם וכל מה שכדאי לזכור."></textarea>
     <div class="save-hint" id="notes-save-hint">&nbsp;</div>
   </section>
 
   <section>
-    <h2>Work and study tasks</h2>
+    <h2>משימות עבודה ולימודים</h2>
     <div class="task-form">
-      <input type="text" id="task-input" placeholder="What needs doing?">
-      <select id="task-cat">
-        <option value="work">Work</option>
-        <option value="study">Study</option>
-        <option value="personal">Personal</option>
+      <input type="text" id="task-input" aria-label="משימה חדשה" dir="auto" placeholder="מה צריך לעשות?">
+      <select id="task-cat" aria-label="קטגוריית המשימה">
+        <option value="work">עבודה</option>
+        <option value="study">לימודים</option>
+        <option value="personal">אישי</option>
       </select>
-      <button id="task-add" type="button">Add</button>
+      <button id="task-add" type="button">הוספה</button>
     </div>
     <ul class="task-list" id="task-list"></ul>
     <div class="err" id="task-err" style="display:none;"></div>
   </section>
 
   <section>
-    <h2>Last 7 nights of sleep</h2>
+    <h2>שינה בשבעת הימים האחרונים</h2>
     <div class="history-strip" id="history-strip">
-      <div class="loading">Loading history…</div>
+      <div class="loading">טוען היסטוריה…</div>
     </div>
   </section>
 
   <section>
-    <h2>This week's balance</h2>
+    <h2>מאזן השבוע</h2>
     <div class="weekly-strip" id="weekly-strip">
-      <div class="loading">Loading week…</div>
+      <div class="loading">טוען את השבוע…</div>
     </div>
   </section>
 
-  <footer class="app-footer">Time Ledger · stored on this device only</footer>
+  <section class="pricing-section" id="pricing"><span class="eyebrow">תמחור שמשנה את כללי המשחק</span><h2>שדרגו לשום דבר מיוחד.</h2><div class="pricing-card"><span class="popular">הכי פופולרי ביקום הדמיוני</span><h3>סגול PRO MAX</h3><div class="price">₪0 <small>/ לנצח, בערך</small></div><p>✓ אותן 24 שעות<br>✓ יותר צללים<br>✓ תמיכה רגשית מגרדיאנט<br>✓ אפס תכונות נוספות</p><button class="gradient-button useless-action" data-tool="upgrade">שדרוג לאותו דבר ↗</button></div></section>
+  <details class="slop-faq"><summary>האם זה באמת AI?</summary><p>לא. זו מתיחה עם הרבה סגול. אין שירות חיצוני ואין חיוב.</p></details>
+  <div class="floating-assistant"><span>✦</span><div><b>עוזר AI דמיוני</b><small>מוכן להגיד לכם לשתות מים.</small></div><button class="useless-action" data-tool="assistant" aria-label="פתיחת העוזר הדמיוני">↗</button></div>
+  <footer class="app-footer">יומן הזמן · נשמר במכשיר הזה בלבד</footer>
 
 </div>
 
 <script type="module" src="./js/app.js"></script>
+<script type="module" src="./js/slop.js"></script>
 </body>
 </html>

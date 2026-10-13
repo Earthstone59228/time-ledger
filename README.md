@@ -1,69 +1,120 @@
-# Time Ledger
+# Time Ledger AI ✦
 
-A personal, offline-first daybook: categorize every hour of your day, jot daily notes, track a work/study checklist, and see your sleep history — installable as a real app on your phone or desktop home screen.
+[العربية](#العربية) · [עברית](#עברית) · [ភាសាខ្មែរ](#ភាសាខ្មែរ)
 
-## What it's built with
+## العربية
 
-Plain HTML/CSS/JS (ES modules), no build step, no framework, no backend. That's deliberate — it's a single-user app that should be easy for you to keep maintaining yourself.
+### المستقبل بنفسجي. والوقت يضيع.
 
-- `index.html` — app shell
-- `css/style.css`, `css/fonts.css` — the ledger/daybook visual style, self-hosted fonts
-- `js/app.js` — all UI logic and rendering
-- `js/store.js` — the storage layer (currently `localStorage`, wrapped in an async API so a sync backend could replace it later without touching `app.js`)
-- `js/dates.js`, `js/categories.js` — small shared helpers
-- `manifest.json`, `sw.js` — what makes it installable and offline-capable
-- `icons/` — app icons (192, 512, maskable variants, iOS touch icon)
-- `fonts/` — self-hosted Source Serif 4 / Inter / IBM Plex Mono, so the app never depends on reaching a font CDN
+نسخة ساخرة من [Time Ledger](https://github.com/Mangodude1/time-ledger)، بواجهة عبرية من اليمين إلى اليسار: تدرجات بنفسجية، بطاقات مضيئة، إحصاءات مختلقة، مساعد وهمي ووعود أكبر من التطبيق نفسه. لا يوجد ذكاء اصطناعي حقيقي أو دفع أو خدمة سحابية.
 
-Data model, exactly as specified:
-- One record per calendar day: `{ date, hours: [24 entries of null|'sleep'|'work'|'study'|'personal'], notes }`
-- One ongoing task list: `{ id, text, category, done, note }[]` — not tied to any day
-- Everything lives in `localStorage` on the device, under keys prefixed `timeledger:`. Nothing leaves the device.
+خلف كل هذا الاستعراض، يمكنك تصنيف ساعات اليوم، كتابة ملاحظات، إدارة المهام ومتابعة النوم خلال الأيام السبعة الماضية. البيانات تبقى على جهازك في `localStorage`، ويعمل التطبيق دون اتصال بعد تحميل ملفاته وتخزينها مؤقتًا.
 
-## Nice-to-haves included
+### التعقيد غير الضروري
 
-- **Drag-to-paint**: on a mouse, click and drag across hours to stamp a range at once (fills in every hour between drag points, so it holds up even on a fast swipe). On touch, tap each hour — this keeps normal page scrolling on your phone unbroken, which mattered more than drag-painting on a touchscreen.
-- **This week's balance**: a mini stacked bar per day for the last 7 days, below the sleep history strip.
-- **Per-task notes**: click "+note" on any checklist item to attach a short note to it.
+- تُكرر حسابات الساعات 512 مرة، مع حد أقصى قدره 24 ساعة لكل حساب.
+- يحتوي `js/buzzwords.js` على 1,536 عبارة لا تقدم أي فائدة.
+- كل زر وهمي ينسخ قائمة العبارات ويرتبها ثماني مرات، ويعرض ثلاث مراحل انتظار، ويعيد بناء رسم عشوائي أربع مرات.
+- الرسم والإحصاءات التسويقية مختلقة؛ لا تمثل بياناتك.
+- ألغِ تحديد مربع وضع المزحة فوق اليوميات لإيقاف الانتظار والجولات الإضافية. يعود الوضع إلى التشغيل عند إعادة تحميل الصفحة.
 
-## Running it locally to try it out
+الأزرار الوهمية فقط تتأخر عمدًا. الملاحظات تستخدم مهلة الحفظ القصيرة الأصلية، ومفاتيح التخزين متوافقة مع المشروع الأصلي. لا توجد حلقات لا نهائية أو طلبات شبكة إضافية من الأدوات الوهمية.
 
-Any static file server works, e.g. from this folder:
+### التشغيل والتثبيت
 
-```
-npx serve .
+من مجلد المشروع:
+
+```sh
+python -m http.server 8000
 ```
 
-then open the URL it prints. (Opening `index.html` directly via `file://` won't work — ES modules and the service worker both require a real `http://` origin.)
+افتح `http://localhost:8000`. لا حاجة إلى بناء أو إطار عمل؛ استخدم خادم HTTP بدل فتح `index.html` مباشرة.
 
-## Installing it for real — on your phone
+للتثبيت على الهاتف أو الحاسوب، انشر الملفات على استضافة ثابتة تدعم HTTPS مثل GitHub Pages، ثم اختر تثبيت التطبيق أو إضافته إلى الشاشة الرئيسية في المتصفح. بعد تعديل أي ملف مخزن مؤقتًا، غيّر `CACHE_NAME` في `sw.js` وانشر النسخة الجديدة وأعد تحميل التطبيق.
 
-A PWA needs to be served over **HTTPS** for the "install" / "add to home screen" flow and offline service worker to work (plain `http://` on your phone's browser won't offer installability). The simplest path is a free static host:
+### الملفات
 
-**Netlify Drop** (fastest, no account required to try it):
-1. Go to [app.netlify.com/drop](https://app.netlify.com/drop) in a desktop browser.
-2. Drag the whole `time-ledger` folder onto the page.
-3. You'll get an HTTPS URL immediately. Optionally sign up (free) to keep it permanently instead of it expiring.
+- `index.html` — الواجهة العبرية وواجهة التسويق الساخرة.
+- `css/style.css` و`css/slop.css` — التصميم الأصلي وطبقة البنفسجي الإضافية.
+- `js/app.js` و`js/store.js` — اليوميات والمهام والتخزين المحلي.
+- `js/categories.js` و`js/dates.js` — حساب الساعات والتواريخ.
+- `js/slop.js` و`js/buzzwords.js` — الأدوات الوهمية وقائمة العبارات المتضخمة.
+- `manifest.json` و`sw.js` و`icons/` — التثبيت والعمل دون اتصال.
 
-**GitHub Pages** (if you already use GitHub — free, permanent, ties to version control):
-1. Create a new repo and push this folder's contents to it.
-2. Repo Settings → Pages → Deploy from branch → pick `main` and `/ (root)`.
-3. GitHub gives you a URL like `https://<you>.github.io/<repo>/`.
+## עברית
 
-Once you have that HTTPS URL, open it on your phone:
+### העתיד סגול. הזמן מתבזבז.
 
-- **iPhone (Safari)**: open the URL → tap the Share icon → **Add to Home Screen**.
-- **Android (Chrome)**: open the URL → tap the ⋮ menu → **Install app** (or you'll see an automatic "Add Time Ledger to Home screen" banner).
+גרסה סאטירית של [Time Ledger](https://github.com/Mangodude1/time-ledger), עם ממשק בעברית מימין לשמאל: גרדיאנטים סגולים, קלפים זוהרים, מדדים מומצאים, עוזר דמיוני והבטחות גדולות מהיישום עצמו. אין כאן AI אמיתי, תשלום או שירות ענן.
 
-It'll then open full-screen, no browser address bar, with the icon you generated, and keep working with no signal.
+מאחורי כל השיווק אפשר לסווג את שעות היום, לכתוב הערות, לנהל משימות ולצפות בשינה בשבעת הימים האחרונים. הנתונים נשארים במכשיר בתוך `localStorage`, והיישום עובד ללא חיבור לרשת אחרי שהקבצים נטענו ונשמרו במטמון.
 
-## Installing it as a desktop app (Windows)
+### סיבוכים מיותרים
 
-Same HTTPS URL, in Chrome or Edge:
-1. Open the URL.
-2. Click the install icon in the address bar (or ⋮ menu → **Apps** → **Install this site as an app**).
-3. It opens in its own window with a taskbar icon and Start Menu entry, and keeps working offline.
+- חישובי השעות חוזרים 512 פעמים, עם הגבלה של 24 שעות לכל חישוב.
+- `js/buzzwords.js` מכיל 1,536 ביטויים שלא מועילים לשום דבר.
+- כל כפתור דמיוני מעתיק וממיין את הקטלוג שמונה פעמים, מציג שלושה שלבי המתנה ובונה תרשים אקראי ארבע פעמים.
+- התרשים והמדדים השיווקיים מומצאים; הם אינם מייצגים את הנתונים שלכם.
+- בטלו את הסימון במצב המתיחה שמעל היומן כדי להפסיק את ההמתנות והסבבים הנוספים. המצב מופעל שוב בטעינה מחדש.
 
-## Making changes later
+רק הכפתורים הדמיוניים מתעכבים בכוונה. ההערות משתמשות בהשהיית השמירה הקצרה המקורית, ומפתחות האחסון תואמים לפרויקט המקורי. אין לולאות אינסופיות או בקשות רשת נוספות מהכלים הדמיוניים.
 
-Because the service worker caches everything for offline use, **editing a file alone won't update what's already installed on a device** — you need to bump the cache name in `sw.js` (`CACHE_NAME = 'time-ledger-v2'` → `'time-ledger-v3'`, etc.) on every deploy that changes any cached file. That's what forces the old cache to drop and the new files to load. Redeploy to whichever host you're using and the installed app will pick it up next time it's opened (it fetches the new `sw.js`, installs it in the background, and takes over on the next full reload).
+### הפעלה והתקנה
+
+מתוך תיקיית הפרויקט:
+
+```sh
+python -m http.server 8000
+```
+
+פתחו את `http://localhost:8000`. אין תהליך בנייה או מסגרת פיתוח; השתמשו בשרת HTTP במקום לפתוח ישירות את `index.html`.
+
+להתקנה בטלפון או במחשב, פרסמו את הקבצים באירוח סטטי עם HTTPS, למשל GitHub Pages, ובחרו בהתקנת יישום או בהוספה למסך הבית בדפדפן. אחרי שינוי בקובץ שנשמר במטמון, עדכנו את `CACHE_NAME` בתוך `sw.js`, פרסמו מחדש וטענו מחדש את היישום.
+
+### קבצים
+
+- `index.html` — הממשק העברי ודף השיווק הסאטירי.
+- `css/style.css` ו־`css/slop.css` — העיצוב המקורי ושכבת הסגול הנוספת.
+- `js/app.js` ו־`js/store.js` — היומן, המשימות והאחסון המקומי.
+- `js/categories.js` ו־`js/dates.js` — ספירת השעות והתאריכים.
+- `js/slop.js` ו־`js/buzzwords.js` — הכלים הדמיוניים וקטלוג הביטויים המנופח.
+- `manifest.json`, `sw.js` ו־`icons/` — התקנה ושימוש ללא חיבור לרשת.
+
+## ភាសាខ្មែរ
+
+### អនាគតពណ៌ស្វាយ។ ពេលវេលាត្រូវបានខ្ជះខ្ជាយ។
+
+នេះជាកំណែបែបលេងសើចនៃ [Time Ledger](https://github.com/Mangodude1/time-ledger) ដែលមានផ្ទៃប្រើប្រាស់ជាភាសាហេប្រឺពីស្តាំទៅឆ្វេង៖ ពណ៌ស្វាយចម្រុះ កាតភ្លឺៗ ស្ថិតិប្រឌិត ជំនួយការក្លែងក្លាយ និងការសន្យាធំជាងកម្មវិធី។ គ្មាន AI ពិតប្រាកដ ការបង់ប្រាក់ ឬសេវាពពកទេ។
+
+នៅពីក្រោយការផ្សព្វផ្សាយទាំងនេះ អ្នកអាចបែងចែកម៉ោងក្នុងមួយថ្ងៃ សរសេរកំណត់ចំណាំ គ្រប់គ្រងកិច្ចការ និងមើលប្រវត្តិការគេងក្នុងរយៈពេលប្រាំពីរថ្ងៃចុងក្រោយ។ ទិន្នន័យស្ថិតនៅលើឧបករណ៍របស់អ្នកក្នុង `localStorage`។ កម្មវិធីអាចដំណើរការដោយគ្មានអ៊ីនធឺណិត បន្ទាប់ពីឯកសារត្រូវបានផ្ទុក និងរក្សាទុកក្នុងឃ្លាំងសម្ងាត់។
+
+### ភាពស្មុគស្មាញដែលមិនចាំបាច់
+
+- ការគណនាម៉ោងត្រូវបានធ្វើឡើងវិញ 512 ដង ដោយកំណត់ត្រឹម 24 ម៉ោងក្នុងការគណនានីមួយៗ។
+- `js/buzzwords.js` មានឃ្លាឥតប្រយោជន៍ចំនួន 1,536។
+- ប៊ូតុងក្លែងក្លាយនីមួយៗចម្លង និងតម្រៀបបញ្ជីឃ្លាប្រាំបីដង បង្ហាញការរង់ចាំបីដំណាក់កាល និងបង្កើតក្រាហ្វចៃដន្យឡើងវិញបួនដង។
+- ក្រាហ្វ និងស្ថិតិផ្សព្វផ្សាយគឺជាការប្រឌិត មិនមែនជាទិន្នន័យរបស់អ្នកទេ។
+- ដោះធីកប្រអប់របៀបលេងសើចនៅខាងលើកំណត់ហេតុ ដើម្បីបិទការរង់ចាំ និងជុំបន្ថែម។ របៀបនេះបើកឡើងវិញពេលផ្ទុកទំព័រឡើងវិញ។
+
+មានតែប៊ូតុងក្លែងក្លាយប៉ុណ្ណោះដែលពន្យារពេលដោយចេតនា។ កំណត់ចំណាំប្រើការពន្យារពេលរក្សាទុកខ្លីដូចកំណែដើម ហើយសោផ្ទុកទិន្នន័យនៅតែត្រូវគ្នានឹងគម្រោងដើម។ គ្មានរង្វិលជុំមិនចេះចប់ ឬសំណើបណ្តាញបន្ថែមពីឧបករណ៍ក្លែងក្លាយទេ។
+
+### ដំណើរការ និងដំឡើង
+
+នៅក្នុងថតគម្រោង៖
+
+```sh
+python -m http.server 8000
+```
+
+បើក `http://localhost:8000`។ មិនត្រូវការដំណើរការបង្កើតកម្មវិធី ឬក្របខណ្ឌអភិវឌ្ឍន៍ទេ។ ប្រើម៉ាស៊ីនមេ HTTP ជំនួសឱ្យការបើក `index.html` ដោយផ្ទាល់។
+
+ដើម្បីដំឡើងលើទូរសព្ទ ឬកុំព្យូទ័រ ដាក់ឯកសារនៅលើសេវាបង្ហោះគេហទំព័រឋិតិវន្តដែលគាំទ្រ HTTPS ដូចជា GitHub Pages ហើយជ្រើសរើសដំឡើងកម្មវិធី ឬបន្ថែមទៅអេក្រង់ដើមក្នុងកម្មវិធីរុករក។ បន្ទាប់ពីកែឯកសារដែលរក្សាទុកក្នុងឃ្លាំងសម្ងាត់ សូមប្តូរ `CACHE_NAME` ក្នុង `sw.js` បង្ហោះកំណែថ្មី និងផ្ទុកកម្មវិធីឡើងវិញ។
+
+### ឯកសារ
+
+- `index.html` — ផ្ទៃប្រើប្រាស់ភាសាហេប្រឺ និងទំព័រផ្សព្វផ្សាយបែបលេងសើច។
+- `css/style.css` និង `css/slop.css` — រចនាប័ទ្មដើម និងស្រទាប់ពណ៌ស្វាយបន្ថែម។
+- `js/app.js` និង `js/store.js` — កំណត់ហេតុ កិច្ចការ និងការផ្ទុកទិន្នន័យលើឧបករណ៍។
+- `js/categories.js` និង `js/dates.js` — ការរាប់ម៉ោង និងកាលបរិច្ឆេទ។
+- `js/slop.js` និង `js/buzzwords.js` — ឧបករណ៍ក្លែងក្លាយ និងបញ្ជីឃ្លាដ៏វែង។
+- `manifest.json`, `sw.js` និង `icons/` — ការដំឡើង និងការប្រើប្រាស់ដោយគ្មានអ៊ីនធឺណិត។
